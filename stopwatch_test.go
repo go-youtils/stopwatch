@@ -65,6 +65,7 @@ func TestStopWatchStopAndRestart(t *testing.T) {
 	}
 
 	myStopwatch.Reset()
+	myStopwatch.Start()
 	time.Sleep(100 * time.Millisecond)
 	actualString = myStopwatch.SecondsFormatted(2)
 	expectedString = "0.10"

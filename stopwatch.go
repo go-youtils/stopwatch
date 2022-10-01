@@ -16,24 +16,25 @@ type Stopwatch struct {
 
 func NewStopwatch() *Stopwatch {
 	s := new(Stopwatch)
-	s.hasStarted = false
-	s.isStopped = true
-	s.lastPauseTime = time.Now()
+	s.Reset()
 	return s
 }
 
 func (s *Stopwatch) Start() bool {
-	if s.hasStarted {
+	if !s.isStopped {
 		return false
 	}
-	s.Reset()
+	s.hasStarted = true
+	s.isStopped = false
+	s.lastStartTime = time.Now()
 	return true
 }
 
 func (s *Stopwatch) Reset() {
-	s.hasStarted = true
-	s.isStopped = false
-	s.lastStartTime = time.Now()
+	s.lastPauseTime = time.Now()
+	s.hasStarted = false
+	s.isStopped = true
+	s.runningDuration = 0.0
 }
 
 func (s *Stopwatch) Stop() {
